@@ -1,14 +1,18 @@
 
+board = [[" ", " ", " "],
+        [" ", " ", " "],
+        [" ", " ", " "]]
 
-from re import X
-
-
-board = [["", "", ""],
-        ["", "", ""],
-        ["", "", ""]]
-
-def printBoard(board: list):
-    pass
+def printBoard():
+    printB = "   1 2 3 \n"
+    printB += "  ------- \n"
+    printB += "A |" + "|".join(board[0]) + "| \n"
+    printB += "  ------- \n"
+    printB += "B |" + "|".join(board[1]) + "| \n"
+    printB += "  ------- \n"
+    printB += "C |" + "|".join(board[2]) + "| \n"
+    printB += "  ------- \n"
+    print(printB)
 
 
 
@@ -34,7 +38,7 @@ def put(position: str, gamePiece: str):
         pos2 = 1
     elif (number == "3"):
         pos2 = 2
-    if board[pos1][pos2] == "":
+    if board[pos1][pos2] == " ":
         board[pos1][pos2] = gamePiece
     return True
     
@@ -48,42 +52,42 @@ def gameDone():
     win, piece = dWin()
     if win:
         return piece
-    return ""
+    return " "
 
 def hWin ():
     for row in board:
-        piece = ""
+        piece = " "
         for cell in row:
-            if cell == "":
+            if cell == " ":
                 break
-            if piece == "":
+            if piece == " ":
                 piece = cell
             elif piece != cell:
                 break
         return True, piece #win vist vi kommmer gjennom hele raden
-    return False, ""  #ingen win dersom om vi kommer hit
+    return False, " "  #ingen win dersom om vi kommer hit
 
 def vWin ():
     for i in range(3):
-        piece = ""
+        piece = " "
         for j in range(3):
             cell = board[j][i]
-            if cell == "":
+            if cell == " ":
                 break
-            if piece == "":
+            if piece == " ":
                 piece = cell
             elif piece != cell:
                 break
         return True, piece #win vist vi kommmer gjennom hele raden
-    return False, ""  #ingen win dersom om vi kommer hit
+    return False, " "  #ingen win dersom om vi kommer hit
 
 def dWin ():
     d1 = board[0][0]
-    if board [0][0] == board [1][1] and board [0][0] == board[2][2] and board [0][0] != "":
+    if board [0][0] == board [1][1] and board [0][0] == board[2][2] and board [0][0] != " ":
         return True, board[0][0]
-    if board [0][2] == board [1][1] and board [0][0] == board[2][0] and board [0][2] != "":
+    if board [0][2] == board [1][1] and board [0][0] == board[2][0] and board [0][2] != " ":
         return True, board[0][2]
-    return False, ""
+    return False, " "
 
 p1 = "X"
 p2 = "O"
@@ -95,7 +99,7 @@ while not isDone:
         print("Error, not valid position. Pick again")
         continue
     winPiece = gameDone()
-    if winPiece != "":
+    if winPiece != " ":
         break
     if turn == p1:
         turn =p2
